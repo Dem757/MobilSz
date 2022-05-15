@@ -1,11 +1,14 @@
 #pragma once
-#include "MobilSz.h"
 #include "string5.h"
-#include "memtrace.h"
+#ifdef MEMTRACE
+# include "memtrace.h"
+#endif
+
+/// Csomag osztály
 
 class Csomag {
-	int percdij;
-	int smsdij;
+	int percdij;	//Beszélt percek díja
+	int smsdij;		//Elküdött smsek díja
 public:
 	/// Díjazás számítása
 	/// @param pd - beszélt percek száma
@@ -18,12 +21,15 @@ public:
 	int getSmsdij() { return smsdij; }
 	void setSmsdij(int sd) { smsdij = sd; }
 	void setPercdij(int pd) { percdij = pd; }
+	//Ha esetleg valahol hiba csúszna a rendszerbe és nem rendelkezik csomaggal.
 	virtual String getCsomag() { return "Nincs csomag"; }
 	virtual ~Csomag() {};
 };
 
 class Alap : public Csomag {
 public:
+	/// Alap konstruktor
+	/// Percdíj és smsdíj beállítása
 	Alap() {
 		setSmsdij(25);
 		setPercdij(25);
@@ -32,9 +38,12 @@ public:
 };
 
 class MobiNet : public Csomag {
-	int ingyensms = 10;
+	int ingyensms;		//Ingyenesen küldhetõ smsek száma
 public:
+	/// MobiNet konstruktor
+	/// Ingyen smsek és percdíj és smsdíj beállítása.
 	MobiNet() {
+		ingyensms = 10;
 		setSmsdij(45);
 		setPercdij(45);
 	}

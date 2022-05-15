@@ -6,7 +6,9 @@
 #include <iostream>             // Kiíratáshoz
 #include <cstring>              // Stringműveletekhez
 
-#include "memtrace.h"           // a standard headerek után kell lennie
+#ifdef MEMTRACE
+    #include "memtrace.h"
+#endif          // a standard headerek után kell lennie
 #include "string5.h"
 
 using std::cin;
